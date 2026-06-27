@@ -30,6 +30,30 @@
     z-index: 99;
 }
 
+/* Desktop  logo*/
+.logo-img{
+    width: auto;
+    height: auto;
+    max-height: 95px;
+}
+
+/* Mobile */
+@media (max-width:768px){
+    .logo-img{
+        max-height: 80px !important;
+    }
+}
+/* Desktop */
+.feature-icon{
+    font-size: 2rem;
+}
+
+/* Mobile */
+@media (max-width:768px){
+    .feature-icon{
+        font-size: 1.5rem !important;
+    }
+}
 @media (max-width:768px){
     .back-to-top{
         right: 5px !important;
