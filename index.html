@@ -586,21 +586,21 @@
         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
             <div class="position-relative h-100">
 
-                <video
-                    class="position-absolute w-100 h-100 rounded shadow"
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    controls
-                    style="object-fit: cover;">
+              <video
+    id="successVideo"
+    class="position-absolute w-100 h-100 rounded shadow"
+    autoplay
+    muted
+    loop
+    playsinline
+    controls
+    preload="auto"
+    style="object-fit: cover;">
 
-                    <source src="img/exergyv1.mp4" type="video/mp4">
+    <source src="img/exergyv1.mp4" type="video/mp4">
 
-                    Your browser does not support the video tag.
-
-                </video>
-
+    Your browser does not support the video tag.
+</video>
             </div>
         </div>
 
@@ -1041,6 +1041,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateCounter();
     });
+});
+document.addEventListener("DOMContentLoaded", function () {
+
+    const video = document.getElementById("successVideo");
+
+    if (!video) return;
+
+    function handleVideo() {
+
+        const rect = video.getBoundingClientRect();
+
+        // Is any part of the video visible?
+        const visible =
+            rect.top < window.innerHeight &&
+            rect.bottom > 0;
+
+        // Is the video near the center of the screen?
+        const videoCenter = rect.top + rect.height / 2;
+        const screenCenter = window.innerHeight / 2;
+        const centerVisible = Math.abs(videoCenter - screenCenter) < 180;
+
+        if (visible) {
+            video.play().catch(() => {});
+        } else {
+            video.pause();
+        }
+
+        video.muted = !centerVisible;
+    }
+
+    window.addEventListener("scroll", handleVideo);
+    window.addEventListener("resize", handleVideo);
+
+    handleVideo();
+
 });
 </script>
 </body>
